@@ -1,18 +1,30 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
+import ConversationScreen from '../screens/ConversationScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+
+const HomeScreenGroupNavigation = StackNavigator({
+  Home: {
+    screen: HomeScreen
+  },
+  Conversation: {
+    screen: ConversationScreen
+  }
+}, {
+    headerMode: 'none'
+  })
 
 export default TabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenGroupNavigation,
     },
     Links: {
       screen: LinksScreen,
@@ -52,7 +64,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
-    swipeEnabled: false,
+    animationEnabled: true,
+    swipeEnabled: true,
   }
 );
