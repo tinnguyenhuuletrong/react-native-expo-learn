@@ -18,7 +18,7 @@ const HomeScreenGroupNavigation = StackNavigator({
     screen: ConversationScreen
   }
 }, {
-    headerMode: 'none'
+	  headerMode: 'none',
   })
 
 export default TabNavigator(

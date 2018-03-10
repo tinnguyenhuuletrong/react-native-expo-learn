@@ -1,10 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { HeaderBackButton } from 'react-navigation';
 
-export default class LinksScreen extends React.Component {
-  static navigationOptions = {
-    
+const Left = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress}>
+    <Text>Back</Text>
+  </TouchableHighlight>
+);
+
+export default class ConversationScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    const name = params ? params.name : null;
+
+    return {
+      title: name,
+      headerLeft: <HeaderBackButton title='Back' onPress={() => navigation.goBack(null)} />,
+    }
   };
 
   render() {
