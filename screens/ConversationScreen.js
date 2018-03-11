@@ -31,7 +31,7 @@ export default class ConversationScreen extends React.Component {
         <ScrollView style={styles.container}>
           <MyMessage {...fakeMyMessage} />
           <OtherMessage {...fakeOtherMessage}/>
-          <OtherMessage {...{...fakeOtherMessage, hasAvatar: true}}/>
+          <OtherMessage {...{...fakeOtherMessage, hasAvatar: true, content: {type:'like', size:30}}}/>
         </ScrollView>
       </View>
     );
@@ -39,7 +39,7 @@ export default class ConversationScreen extends React.Component {
 }
 
 const fakeMyMessage = {
-  content: 'This is my message',
+  content: {type: 'image', uri: 'https://visualhunt.com/photos/s/7/pet-cat-eye.jpg'},
   status: 'read'
 }
 const fakeOtherMessage = {

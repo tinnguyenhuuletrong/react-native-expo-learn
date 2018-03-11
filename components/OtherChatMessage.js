@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import CircleAvatar from './CircleAvatar';
+import MultimediaContent from './MultimediaContent';
 
 export default ({ sender, content, hasAvatar = false }) => (
     <View style={styles.otherMessageContainer}>
@@ -9,19 +10,11 @@ export default ({ sender, content, hasAvatar = false }) => (
             :
             <View style={styles.otherMessageAvatar} />
         }
-        <TouchableOpacity style={styles.messageContent}>
-            <Text style={styles.messageContentText} >{content}</Text>
-        </TouchableOpacity>
+        <MultimediaContent content={content} color='black' backgroundColor='#f1f0f0'/>
     </View >
 )
 
 const styles = StyleSheet.create({
-    messageContent: {
-      backgroundColor: '#f1f0f0',
-      borderRadius: 15,
-      padding: 8,
-      margin: 5
-    },
     myMessageStatus: {
       alignSelf: 'flex-end',
     },
