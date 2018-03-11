@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 
-const Left = ({ onPress }) => (
-  <TouchableHighlight onPress={onPress}>
-    <Text>Back</Text>
-  </TouchableHighlight>
-);
+import CircleAvatar from '../components/CircleAvatar';
+import MineChatMessage from '../components/MineChatMessage';
+import OtherChatMessage from '../components/OtherChatMessage';
+
+
+const MyMessage = MineChatMessage;
+const OtherMessage = OtherChatMessage
 
 export default class ConversationScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,6 +19,7 @@ export default class ConversationScreen extends React.Component {
     return {
       title: name,
       headerLeft: <HeaderBackButton title='Back' onPress={() => navigation.goBack(null)} />,
+      tabBarVisible: false
     }
   };
 
@@ -24,16 +28,30 @@ export default class ConversationScreen extends React.Component {
     const id = params ? params.id : null;
     return (
       <View style={styles.container}>
-        <Text>{`Conversation: ${id}`}</Text>
+        <ScrollView style={styles.container}>
+          <MyMessage {...fakeMyMessage} />
+          <OtherMessage {...fakeOtherMessage}/>
+          <OtherMessage {...{...fakeOtherMessage, hasAvatar: true}}/>
+        </ScrollView>
       </View>
     );
   }
 }
 
+const fakeMyMessage = {
+  content: 'This is my message',
+  status: 'read'
+}
+const fakeOtherMessage = {
+  content: 'This is other message',
+  sender: {
+    avatarUrl: 'https://graph.facebook.com/100001248687904/picture?width=200&height=200'
+  },
+  hasAvatar: false
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
-  },
+  }
 });

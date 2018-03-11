@@ -7,11 +7,12 @@ import {
   View,
   Platform
 } from 'react-native';
+import CircleAvatar from './CircleAvatar';
 
 export default ConversationTopic = ({ id, avatarUrl, name, content, time, onSelect }) => {
     return (
         <TouchableOpacity style={styles.chatItemContainer} onPress={_ => onSelect(id)} >
-            <Image source={{ uri: avatarUrl }} style={styles.chatItemIcon} />
+            <CircleAvatar source={{ uri: avatarUrl }} />
             <View style={styles.chatItemDetail}>
                 <View style={styles.chatItemContentGroup} >
                     <Text style={styles.chatTitle}>{name}</Text>
@@ -24,7 +25,6 @@ export default ConversationTopic = ({ id, avatarUrl, name, content, time, onSele
 }
 
 const CHAT_ITEM_HEIGHT = 80;
-const CHAT_ITEM_ICON_HEIGHT = 70;
 const styles = StyleSheet.create({
   chatItemContainer: {
     flexDirection: 'row',
@@ -43,14 +43,6 @@ const styles = StyleSheet.create({
       },
     }),
     paddingTop: 2
-  },
-  chatItemIcon: {
-    width: 70,
-    height: CHAT_ITEM_ICON_HEIGHT,
-    borderRadius: 35,
-    marginLeft: 5,
-    borderColor: 'black',
-    borderWidth: 1,
   },
   chatItemDetail: {
     flex: 1,

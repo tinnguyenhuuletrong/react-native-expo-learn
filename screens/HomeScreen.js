@@ -2,14 +2,45 @@ import React from 'react';
 import {
   Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  FlatList
 } from 'react-native';
 
 import ConversationTopic from '../components/ConversationTopic';
+
+export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home'
+  };
+
+  selectChatItem(itemId) {
+    this.props.navigation.navigate('Conversation', fakeData.find(itm => itm.id == itemId));
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList 
+          style={styles.container}
+          data={fakeData}
+          renderItem={({item, separators}) => (
+            <ConversationTopic {...item} onSelect={this.selectChatItem.bind(this)} />
+          )}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  }
+});
 
 const fakeData = [{
   id: 1,
@@ -26,35 +57,3 @@ const fakeData = [{
   content: 'ThaiNguyen: beep',
   time: new Date()
 }]
-
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home'
-  };
-
-  selectChatItem(itemId) {
-    this.props.navigation.navigate('Conversation', fakeData.find(itm => itm.id == itemId));
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          {
-            fakeData.map(itm => <ConversationTopic {...itm} onSelect={this.selectChatItem.bind(this)}/>)
-          }
-        </ScrollView>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingTop: 0,
-  },
-});
